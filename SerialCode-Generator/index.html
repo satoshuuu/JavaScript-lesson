@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SerialCode</title>
+</head>
+<body>
+  <p>重複のない数字の生成(コンソール上)</p>
+  <script>
+    let seed1 = [];
+    let seed2 = [];
+    let seed3 = [];
+    let serialCode = [];
+    let seeds = [seed1,seed2,seed3];
+
+    //数値の作成
+    for(i=0; i<3; i++) {
+      for(j=1000; j < 10000; j++) {
+        seeds[i].push(j);
+      }
+    }
+
+    for(i=0; i<3; i++) {
+      for(j=0; j<100000; j++) {
+        let a = Math.floor(Math.random() * seeds[i].length);
+        let b = Math.floor(Math.random() * seeds[i].length);
+        
+        let tmp = seeds[i][a];
+        seeds[i][a] = seeds[i][b];
+        seeds[i][b] = tmp;
+      }
+    }
+
+    for(i = 1000; i < 10000; i++) {
+      let str = String(seed1[i-1000]) + "-" + String(seed2[i-1000] + "-" + String(seed3[i-1000]));
+      serialCode.push(str);
+    }
+
+    console.log(serialCode);
+  </script>
+</body>
+</html>
